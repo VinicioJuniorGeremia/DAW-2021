@@ -3,7 +3,8 @@ function inicio(){
     console.log(variavel)
 }
 function meio() {
-    const variavel = ''
+    const variavel = 'Executando processo';
+    console.log()
 }
 
 function run() {
