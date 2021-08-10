@@ -4,10 +4,19 @@ function inicio(){
 }
 function meio() {
     const variavel = 'Executando processo';
-    console.log()
+    console.log(variavel)
+}
+function fim() {
+    const variavel = 'Finalizando execução do processo';
+    console.log(variavel)
 }
 
 function run() {
     inicio();
+
+    meio()
+
+    fim()
 }
+
 run();
