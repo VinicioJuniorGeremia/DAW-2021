@@ -61,7 +61,7 @@ module.exports = {
         }
     },
 
-    delete: (req, res) => {
+    delete: async(req, res) => {
         try {
             
             const result = await repository.findById(req.params)
