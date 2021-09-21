@@ -1,80 +1,116 @@
 const repository = require('../models/group-repository');
 
 module.exports = {
-    
+
+    //Método acionado para retornar TODOS os registro
     index: async (req, res) => {
         try {
-            
-            const result = await repository.find()
-            
+            //Chama o método do repository que retorna TODOS os registros
+            const result = await repository.find();
+
+            //Retorna os registros encontrados
             return res.json(result);
-            
+
         } catch (error) {
-            res.status(500).json({message: error.message})
+            //Se der erro, retorna o erro com status 500
+            return res.status(500).json({message: error.message})
         }
     },
 
+    //Método que que chama uma inserção do registro no banco
     create: async (req, res) => {
-        
         const group = req.body;
-        
+
         try {
+
+            //Chamo a função insere o registro no banco de dados
+            const result = await repository.create(group);
+
+            //Pego o ID criado (em result[0]) e atribuo no group.id
+            group.id = result[0];
+
+            //Retorno o registro inserido (completo, com ID) com o status 201
+            res.status(201).json(group);
             
-            const result = await repository.create()
-            return res.status(201).json(result);
             
         } catch (error) {
-            res.status(500).json({message: error.message})
+            //Se der erro, retorna o erro com status 500
+            return res.status(500).json({message: error.message})
         }
     },
 
-    show: async(req, res) => {
+    //Método que retorna o registro baseado no ID passado por parâmetro
+    show: async (req, res) => {
+
         try {
-            
-            const result = await repository.findById(req.params)
-            if(result.length === 0) {
-                return res.status(404).json({message: 'Not found'})
+
+            //Busco um registro com o ID passado por parâmetro
+            const result = await repository.findById(req.params);
+
+            //Testo se encontrou algum registro com o ID passado por parâmetro
+            if (result.length === 0) {
+                //Não encontrado
+                return res.status(404).json({message: 'Not found'});
             }
 
-            return res.json(result)
-            res.status(500).json({message: error.message})
+            //Se não entrou no IF acima, significa que encontrou o registro, então retorna-o
+            return res.json(result[0])
+
             
         } catch (error) {
-            res.status(500).json({message: error.message})
+            //Se der erro, retorna o erro com status 500
+            return res.status(500).json({message: error.message})
         }
     },
 
     update: async (req, res) => {
         const group = req.body;
+
         try {
-            
-            const result = await repository.findById(req.params)
-            if(result.length === 0) {
-                return res.status(404).json({message: 'Not found'})
+
+            //Busco um registro com o ID passado por parâmetro
+            const result = await repository.findById(req.params);
+
+            //Testo se encontrou algum registro com o ID passado por parâmetro
+            if (result.length === 0) {
+                //Não encontrado
+                return res.status(404).json({message: 'Not found'});
             }
 
-            return res.json(result)
-            res.status(500).json({message: error.message})
+            //Se não entrou no IF acima, significa que encontrou o registro e pode ser alterado
+            await repository.update(group);
+
+            //Retorno o registro alterado
+            res.json(group);
             
         } catch (error) {
-            res.status(500).json({message: error.message})
+            //Se der erro, retorna o erro com status 500
+            return res.status(500).json({message: error.message})
         }
     },
 
-    delete: async(req, res) => {
+    delete: async (req, res) => {
         try {
-            
-            const result = await repository.findById(req.params)
-            if(result.length === 0) {
-                return res.status(404).json({message: 'Not found'})
+
+            //Busco um registro com o ID passado por parâmetro
+            const result = await repository.findById(req.params);
+
+            //Testo se encontrou algum registro com o ID passado por parâmetro
+            if (result.length === 0) {
+                //Não encontrado
+                return res.status(404).json({message: 'Not found'});
             }
 
-            await repository.delete(reqparams);
+            //Se não entrou no IF acima, significa que encontrou o registro, então apaga-o
+            await repository.delete(req.params)
 
+            //Retorno para o cliente o status 204 -> Sem conteúdo
             return res.status(204).json();
             
         } catch (error) {
-            res.status(500).json({message: error.message})
+            //Se der erro, retorna o erro com status 500
+            return res.status(500).json({message: error.message})
         }
     }
+
 }

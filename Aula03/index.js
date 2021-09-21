@@ -10,7 +10,7 @@ app.use(routes);
 
 //rota principal
 app.get('/', (req, res) => {
-    //res.send(`It's working!`);
+    res.send(`It's working!`);
 })
 
  
