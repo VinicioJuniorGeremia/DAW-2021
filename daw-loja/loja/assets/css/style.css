@@ -130,3 +130,41 @@ header nav li {
     background-color:#633277;
     border-color:#633277;
 }
+
+.brands ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    list-style: none;
+    
+}
+
+.brands ul li {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+footer {
+    background-color: #515d6a;
+    padding: 48px 0;
+    color: white;
+}
+footer h5 {
+    margin: 0 0 32px 48px;
+}
+footer ul {
+    list-style: none;
+    margin-left: 16px;
+}
+footer li a {
+    color: white;
+    text-decoration: none;
+}
+footer li a:hover {
+    color: #999;
+    text-decoration: underline;
+}
