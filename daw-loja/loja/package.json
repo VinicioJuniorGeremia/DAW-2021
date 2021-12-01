@@ -1,13 +1,14 @@
 {
-  "name": "s",
-  "version": "s",
-  "main": "s",
-  "license": "s",
+  "name": "a",
+  "version": "a",
+  "main": "a",
+  "license": "a",
   "dependencies": {
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.6.1"
   },
-  "description": "s",
-  "repository": "s",
-  "author": "s"
+  "description": "a",
+  "repository": "a",
+  "author": "a",
+  "private": null
 }
